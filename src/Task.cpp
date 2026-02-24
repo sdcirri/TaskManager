@@ -1,19 +1,20 @@
-#include <utility>
-#include <string>
-#include <chrono>
-
 #include "Task.hpp"
+
+#include <chrono>
+#include <string>
+
+#include <nlohmann/json.hpp>
+
 #include "utils.hpp"
-#include "json.hpp"
 
 using json = nlohmann::json;
 using namespace std::chrono;
 using std::string;
 
-Task::Task(uint64_t id, string title, string description, time_point<system_clock> expiresAt) :
+Task::Task(uint64_t id, const string& title, const string& description, const time_point<system_clock>& expiresAt) :
 	id(id),
-	title(std::move(title)),
-	description(std::move(description)),
+	title(title),
+	description(description),
 	expiresAt(expiresAt),
 	done(false) {}
 
@@ -45,16 +46,16 @@ bool Task::isDone() const {
 	return done;
 }
 
-void Task::setTitle(string& title) {
-	this->title = std::move(title);
+void Task::setTitle(const string& title) {
+	this->title = title;
 }
 
-void Task::setDescription(string& description) {
-	this->description = std::move(description);
+void Task::setDescription(const string& description) {
+	this->description = description;
 }
 
-void Task::setExpiresAt(time_point<system_clock>& expiresAt) {
-	this->expiresAt = std::move(expiresAt);
+void Task::setExpiresAt(const time_point<system_clock>& expiresAt) {
+	this->expiresAt = expiresAt;
 }
 
 void Task::markAsDone() {

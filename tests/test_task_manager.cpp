@@ -88,3 +88,18 @@ TEST_CASE("Storage JSON") {
 	}
 }
 
+TEST_CASE("Shallow copy tasks") {
+	auto& tm = TaskManager::getInstance();
+	auto exp = system_clock::now() + days(10);
+	tm.addTask("Studiare gestione memoria in C++", "Difficile", exp);
+
+	string newDesc = "Molto difficile";
+	auto tasks = tm.getTasks();
+	auto& task = tasks.at(0);
+	uint64_t tId = task->getId();
+
+	task->setDescription(string(newDesc));
+	auto to = tm.getTaskById(tId);
+	REQUIRE(to.has_value());
+	REQUIRE(to->get().getDescription() == newDesc);
+}
