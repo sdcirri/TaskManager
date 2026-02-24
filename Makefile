@@ -7,13 +7,13 @@ TESTFLAGS = -lCatch2Main -lCatch2
 all: unit_tests build
 
 build: build/main.o build/Task.o build/TaskManager.o build/TUIManager.o
-	$(CC) $(CCFLAGS) build/main.o build/Task.o build/TaskManager.o build/TUIManager.o -o tmanager
+	$(CC) $(CCFLAGS) build/main.o build/Task.o build/TaskManager.o build/TUIManager.o -o build/tmanager
 
 prebuild:
 	mkdir -p build
 
 clean:
-	rm build/*.o tests/* tmanager 2> /dev/null || true
+	rm build/* tests/test_task test/test_task_manager 2> /dev/null || true
 
 build/Task.o: src/Task.cpp src/Task.hpp src/utils.hpp | prebuild
 	$(CC) $(CCFLAGS) -c src/Task.cpp -o build/Task.o
