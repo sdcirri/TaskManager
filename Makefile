@@ -13,7 +13,7 @@ prebuild:
 	mkdir -p build
 
 clean:
-	rm build/*.o 2> /dev/null || true
+	rm build/*.o tests/* tmanager 2> /dev/null || true
 
 build/Task.o: src/Task.cpp src/Task.hpp src/utils.hpp | prebuild
 	$(CC) $(CCFLAGS) -c src/Task.cpp -o build/Task.o
@@ -28,10 +28,14 @@ build/main.o: src/main.cpp src/TUIManager.hpp | prebuild
 	$(CC) $(CCFLAGS) -c src/main.cpp -o build/main.o
 
 test_task: tests/test_task.cpp src/utils.hpp build/Task.o
-	$(CC) $(CCFLAGS) tests/test_task.cpp build/Task.o -o tests/test_task $(TESTFLAGS) && ./tests/test_task && rm ./tests/test_task
+	$(CC) $(CCFLAGS) tests/test_task.cpp build/Task.o -o tests/test_task $(TESTFLAGS)
+	./tests/test_task
+	rm ./tests/test_task
 
 test_task_manager: tests/test_task_manager.cpp build/Task.o build/TaskManager.o
-	$(CC) $(CCFLAGS) tests/test_task_manager.cpp build/Task.o build/TaskManager.o -o tests/test_task_manager $(TESTFLAGS) && ./tests/test_task_manager && rm ./tests/test_task_manager
+	$(CC) $(CCFLAGS) tests/test_task_manager.cpp build/Task.o build/TaskManager.o -o tests/test_task_manager $(TESTFLAGS)
+	./tests/test_task_manager
+	rm ./tests/test_task_manager
 
 unit_tests: test_task test_task_manager
 
