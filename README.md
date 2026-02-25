@@ -1,3 +1,7 @@
+![C++](https://img.shields.io/badge/-c++-blue?logo=c%2B%2B&style=for-the-badge)
+![Makefile](https://img.shields.io/badge/-makefile-lightgray?logo=make&style=for-the-badge)
+![JSON](https://img.shields.io/badge/-json-orange?logo=json&style=for-the-badge)
+
 # Task Manager
 A small project I decided to start in order to get familiar
 with all the _quirkiness_ of modern C++ after many years
