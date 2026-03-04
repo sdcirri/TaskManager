@@ -1,0 +1,89 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: it\n"
+
+#: src/TUIManager.cpp:24
+msgid "Due date (YYYY-MM-DD)"
+msgstr "Data scadenza (AAAA-MM-GG)"
+
+#: src/TUIManager.cpp:31
+msgid "Due time (HH:MM:SS)"
+msgstr "Ora scadenza (HH:MM:SS)"
+
+#: src/TUIManager.cpp:59 src/TUIManager.cpp:102
+msgid "Task"
+msgstr "Attività"
+
+#: src/TUIManager.cpp:61
+msgid "Due"
+msgstr "Scadenza"
+
+#: src/TUIManager.cpp:68 src/TUIManager.cpp:157
+msgid "New task"
+msgstr "Nuova attività"
+
+#: src/TUIManager.cpp:69
+msgid "Title"
+msgstr "Titolo"
+
+#: src/TUIManager.cpp:71
+msgid "Description (opt.)"
+msgstr "Descrizione (opz.)"
+
+#: src/TUIManager.cpp:76
+msgid "Task successfully created."
+msgstr "Attività creata con successo."
+
+#: src/TUIManager.cpp:87
+msgid "Select a task to manage"
+msgstr "Seleziona un'attività da gestire"
+
+#: src/TUIManager.cpp:93
+msgid "Invalid input, try again"
+msgstr "Input non valido, riprova"
+
+#: src/TUIManager.cpp:103
+msgid "Mark as done"
+msgstr "Contrassegna come completato"
+
+#: src/TUIManager.cpp:104
+msgid "Edit title"
+msgstr "Modifica titolo"
+
+#: src/TUIManager.cpp:105
+msgid "Edit description"
+msgstr "Modifica descrizione"
+
+#: src/TUIManager.cpp:106
+msgid "Edit deadline"
+msgstr "Modifica scadenza"
+
+#: src/TUIManager.cpp:107
+msgid "Delete task"
+msgstr "Elimina attività"
+
+#: src/TUIManager.cpp:118
+msgid "New title"
+msgstr "Nuovo titolo"
+
+#: src/TUIManager.cpp:124
+msgid "New description"
+msgstr "Nuova descrizione"
+
+#: src/TUIManager.cpp:135
+msgid "Are you sure? This action cannot be undone! [y/N] "
+msgstr "Sei sicuro? L'operazione è irreversibile! [s/N] "
+
+#: src/TUIManager.cpp:138
+msgid "Cancelled."
+msgstr "Annullato."
+
+#: src/TUIManager.cpp:158
+msgid "Manage tasks"
+msgstr "Gestisci attività"
+
+#: src/TUIManager.cpp:159
+msgid "Quit"
+msgstr "Esci"

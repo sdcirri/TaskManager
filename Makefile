@@ -1,29 +1,35 @@
 CXX = clang++
 CXXFLAGS = -I./src -std=c++20
-DBGFLAGS = -DLOCALEDIR="\"./locale\""
-RELFLAGS = -DLOCALEDIR="\"/usr/share/locale\""
+DBGFLAGS = -g -DLOCALEDIR="\"./locale\"" -o build/tmanager_dbg
+RELFLAGS = -DLOCALEDIR="\"/usr/local/share/locale\"" -o build/tmanager
 TESTFLAGS = -lCatch2Main -lCatch2
 
 LANGS = en_US it
+INSTALL_LANGS = $(LANGS:%=/usr/local/share/locale/%)
 
-.PHONY: all clean build debug release unit_tests test_task test_task_manager i18n
+.PHONY: clean build debug release install unit_tests test_task test_task_manager i18n
 
 debug: EXTRA = $(DBGFLAGS)
-debug: build
+debug: build unit_tests
 
 release: EXTRA = $(RELFLAGS)
 release: build
 
-all: unit_tests release
+$(INSTALL_LANGS): /usr/local/share/locale/%: locale/%
+	mkdir -p $@
+	cp -rf $</. $@
+
+install: release $(INSTALL_LANGS)
+	cp -f ./build/tmanager /usr/local/bin/tmanager
 
 build: build/main.o build/Task.o build/TaskManager.o build/TUIManager.o i18n
-	$(CXX) $(CXXFLAGS) $(EXTRA) build/main.o build/Task.o build/TaskManager.o build/TUIManager.o -o build/tmanager
+	$(CXX) $(CXXFLAGS) $(EXTRA) build/main.o build/Task.o build/TaskManager.o build/TUIManager.o
 
 prebuild:
 	mkdir -p build
 
 clean:
-	rm build/* tests/test_task test/test_task_manager 2> /dev/null || true
+	rm -f build/* tests/test_task test/test_task_manager 2> /dev/null || true
 
 build/Task.o: src/Task.cpp src/Task.hpp src/utils.hpp | prebuild
 	$(CXX) $(CXXFLAGS) -c src/Task.cpp -o build/Task.o

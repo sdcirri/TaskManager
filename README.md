@@ -23,17 +23,19 @@ home (eg. `/home/<username>` in UNIX-like OSes or
 `std::reference_wrapper` and such)
 
 ## Dependencies
-In order to build it you'll need [nlohmann's json](https://github.com/nlohmann/json),
+In order to build it you'll need `gettext` and [nlohmann's json](https://github.com/nlohmann/json),
 for unit tests I used `libcatch2`.
 On debian simply run:
 ```sh
-$ sudo apt install nlohmann-json3-dev libcatch2-dev
+$ sudo apt install gettext nlohmann-json3-dev libcatch2-dev
 ```
 
 ## Building and running
-Simply run `make`, it'll run unit tests and then build the final
-executable under `build/tmanager`, if you want to skip tests run
-`make build`, if you only want to run tests run `make unit_tests`.
+Simply run `make`, it'll run unit tests and the build a debug
+version of the program under `build/tmanager`.
+To build the release version run `make release`.
+If you want to install the release version, run `sudo make install`,
+which will build the release version and install under `/usr/local/bin`.
 
 ## Future developments
 - [ ] Windows support (I currently use POSIX to get the user's home)
