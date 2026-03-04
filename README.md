@@ -37,7 +37,7 @@ executable under `build/tmanager`, if you want to skip tests run
 
 ## Future developments
 - [ ] Windows support (I currently use POSIX to get the user's home)
-- [ ] Localization
+- [X] Localization
 - [ ] Sort priorities by expiration
 - [ ] Task priorities
   - [ ] Sort by priority
