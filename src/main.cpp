@@ -1,6 +1,8 @@
+#include <clocale>
 #include <filesystem>
 #include <string>
 
+#include <libintl.h>
 #include <pwd.h>
 #include <unistd.h>
 
@@ -16,13 +18,17 @@ using std::string;
 string initStorage();
 
 int main() {
+	setlocale(LC_ALL, "");
+	bindtextdomain("taskmanager", LOCALEDIR);
+	textdomain("taskmanager");
+
 	const string storageFile = initStorage();
 	TaskManager& tm = TaskManager::getInstance();
 
 	try {
 		tm.tasksFromJsonFile(storageFile);
 	}
-	catch(nlohmann::detail::parse_error) {}
+	catch(nlohmann::detail::parse_error&) {}
 
 	TUIManager::uiLoop();
 	tm.tasksToJsonFile(storageFile);

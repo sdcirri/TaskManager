@@ -1,0 +1,91 @@
+msgid ""
+msgstr ""
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-03-04 20:11+0100\n"
+"Language: it\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: src/TUIManager.cpp:24
+msgid "Due date (YYYY-MM-DD)"
+msgstr ""
+
+#: src/TUIManager.cpp:31
+msgid "Due time (HH:MM:SS)"
+msgstr ""
+
+#: src/TUIManager.cpp:59 src/TUIManager.cpp:102
+msgid "Task"
+msgstr ""
+
+#: src/TUIManager.cpp:61
+msgid "Due"
+msgstr ""
+
+#: src/TUIManager.cpp:68 src/TUIManager.cpp:157
+msgid "New task"
+msgstr ""
+
+#: src/TUIManager.cpp:69
+msgid "Title"
+msgstr ""
+
+#: src/TUIManager.cpp:71
+msgid "Description (opt.)"
+msgstr ""
+
+#: src/TUIManager.cpp:76
+msgid "Task successfully created."
+msgstr ""
+
+#: src/TUIManager.cpp:87
+msgid "Select a task to manage"
+msgstr ""
+
+#: src/TUIManager.cpp:93
+msgid "Invalid input, try again"
+msgstr ""
+
+#: src/TUIManager.cpp:103
+msgid "Mark as done"
+msgstr ""
+
+#: src/TUIManager.cpp:104
+msgid "Edit title"
+msgstr ""
+
+#: src/TUIManager.cpp:105
+msgid "Edit description"
+msgstr ""
+
+#: src/TUIManager.cpp:106
+msgid "Edit deadline"
+msgstr ""
+
+#: src/TUIManager.cpp:107
+msgid "Delete task"
+msgstr ""
+
+#: src/TUIManager.cpp:118
+msgid "New title"
+msgstr ""
+
+#: src/TUIManager.cpp:124
+msgid "New description"
+msgstr ""
+
+#: src/TUIManager.cpp:135
+msgid "Are you sure? This action cannot be undone! [y/N] "
+msgstr ""
+
+#: src/TUIManager.cpp:138
+msgid "Cancelled."
+msgstr "Canceled."
+
+#: src/TUIManager.cpp:158
+msgid "Manage tasks"
+msgstr ""
+
+#: src/TUIManager.cpp:159
+msgid "Quit"
+msgstr ""

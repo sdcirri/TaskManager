@@ -4,7 +4,11 @@
 #include <format>
 #include <iostream>
 
+#include <libintl.h>
+
 #include "TaskManager.hpp"
+
+#define _(s) gettext(s)
 
 using namespace std::chrono;
 using namespace std;
@@ -17,14 +21,14 @@ time_point<system_clock> TUIManager::inputDateTime() {
 	string buf;
 
 	while(true) {
-		cout << "Data scadenza (AAAA-MM-GG): ";
+		cout << _("Due date (YYYY-MM-DD)") << ": ";
 		buf = getline();
 		istringstream ds(buf);
 		ds >> parse("%Y-%m-%d", date);
 		if(!ds.fail()) break;
 	}
 	while(true) {
-		cout << "Ora scadenza (HH:MM:SS): ";
+		cout << _("Due time (HH:MM:SS)") << ": ";
 		buf = getline();
 		istringstream ts(buf);
 		ts >> parse("%H:%M:%S", time);
@@ -52,24 +56,24 @@ void TUIManager::listTasks() {
 		const bool overdue = system_clock::now() >= task->getExpiresAt();
 		cout << "----------------------------------------------------" << endl;
 		cout << (task->isDone() ? "[V] " : (overdue ? "[!] " : "[ ] "));
-		cout << "Task \"" << task->getTitle() << "\" (ID: " << task->getId() << ")" << endl;
+		cout << _("Task") << " \"" << task->getTitle() << "\" (ID: " << task->getId() << ")" << endl;
 		cout <<  (!description.empty() ? "\t" + description + "\n" : "");
-		cout << "Scadenza: " << format("{:%Y-%m-%d %H:%M:%S}", task->getExpiresAt()) << (overdue ? "!" : "") << endl;
+		cout << _("Due") << ": " << format("{:%Y-%m-%d %H:%M:%S}", task->getExpiresAt()) << (overdue ? "!" : "") << endl;
 	}
 }
 
 void TUIManager::addTask() {
 	auto& tm = TaskManager::getInstance();
 
-	cout << "-- Nuova attività --" << endl;
-	cout << "Titolo: ";
+	cout << "-- " << _("New task") << " --" << endl;
+	cout << _("Title") << ": ";
 	const string title = getline();
-	cout << "Descrizione (opz.): ";
+	cout << _("Description (opt.)");
 	const string description = getline();
 
 	const time_point<system_clock> expiresAt = inputDateTime();
 	tm.addTask(title, description, expiresAt);
-	cout << "Task creato con successo." << endl;
+	cout << _("Task successfully created.") << endl;
 }
 
 uint64_t TUIManager::selectTask() {
@@ -80,13 +84,13 @@ uint64_t TUIManager::selectTask() {
 	listTasks();
 
 	while(true) {
-		cout << "Seleziona un'attività da gestire (ID): ";
+		cout << _("Select a task to manage") << " (ID): ";
 		buf = getline();
 		auto [ptr, ec] = from_chars(buf.data(), buf.data() + buf.size(), sel);
 		if(ec == errc() && ptr == buf.data() + buf.size()) {
 			if(tm.getTaskById(sel).has_value()) break;
 		}
-		cout << "Input non valido, riprova" << endl;
+		cout << _("Invalid input, try again") << endl;
 	}
 	return sel;
 }
@@ -95,12 +99,12 @@ void TUIManager::manageTask(const uint64_t taskId) {
 	auto& tm = TaskManager::getInstance();
 	auto& task = tm.getTaskById(taskId)->get();
 
-	cout << "Task \"" << task.getTitle() << "\" (ID: " << task.getId() << ")" << endl;
-	cout << "1. Contrassegna come completato" << endl;
-	cout << "  2. Modifica titolo" << endl;
-	cout << "    3. Modifica descrizione" << endl;
-	cout << "      4. Modifica scadenza" << endl;
-	cout << "        5. Elimina task" << endl;
+	cout << _("Task") << " \"" << task.getTitle() << "\" (ID: " << task.getId() << ")" << endl;
+	cout << "1. " << _("Mark as done") << endl;
+	cout << "  2. " << _("Edit title") << endl;
+	cout << "    3. " << _("Edit description") << endl;
+	cout << "      4. " << _("Edit deadline") << endl;
+	cout << "        5. " << _("Delete task") << endl;
 
 	while(true) {
 		cout << " → ";
@@ -111,13 +115,13 @@ void TUIManager::manageTask(const uint64_t taskId) {
 				task.markAsDone();
 				break;
 			case '2': {
-				cout << "Nuovo titolo: ";
+				cout << _("New title") << ": ";
 				const string newTitle = getline();
 				task.setTitle(newTitle);
 				break;
 			}
 			case '3': {
-				cout << "Nuova descrizione: ";
+				cout << _("New description") << ": ";
 				const string newDescription = getline();
 				task.setDescription(newDescription);
 				break;
@@ -128,10 +132,10 @@ void TUIManager::manageTask(const uint64_t taskId) {
 				break;
 			}
 			case '5': {
-				cout << "Sei sicuro? L'operazione è irreversibile! [s/N] ";
+				cout << _("Are you sure? This action cannot be undone! [y/N] ");
 				if(const string conf = getline(); conf == "s" || conf == "S")
 					tm.deleteTask(taskId);
-				else cout << "Annullato." << endl;
+				else cout << _("Cancelled.") << endl;
 				break;
 			}
 			default:
@@ -150,9 +154,9 @@ void TUIManager::uiLoop() {
 		try {
 			clrscr();
 			listTasks();
-			cout << "1. Nuova attività" << endl;
-			cout << "  2. Gestisci attività" << endl;
-			cout << "    3. Esci" << endl;
+			cout << "1. " << _("New task") << endl;
+			cout << "  2. " << _("Manage tasks") << endl;
+			cout << "    3. " << _("Quit") << endl;
 			while(true) {
 				cout << " → ";
 				const string opt = getline();
